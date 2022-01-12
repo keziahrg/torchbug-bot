@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
+import moment from 'moment'
 import TwitterApi from 'twitter-api-v2'
-var cron = require('node-cron');
 
 dotenv.config()
 
@@ -13,16 +13,18 @@ const client = new TwitterApi({
 
 const postTweet = async (day: number) => {
     const body = {
-        text: `Day ${day} of tweeting @TESOnline asking them to pls gift me a torchbug pet 🥺 #TorchbugTuesday #ESO #ElderScrollsOnline`
+        text: `Day ${day} of tweeting @TESOnline asking them to pls gift me a torchbug pet 🥺 #TorchbugTuesday #ESO #ElderScrollsOnline`,
     }
 
-    await client.v2.tweet(body);
+    try {
+        await client.v2.tweet(body)
+    } catch (err) {
+        console.log('error:', err?.data?.detail)
+    }
 }
 
-let day = 0;
-cron.schedule('* 4 * * *', () => {
-    day++
-    postTweet(day)
-  }, {
-    timezone: "Pacific/Auckland"
-  });
+const startDate: any = moment('12-01-2022', 'DD-MM-YYYY')
+let currentDate: any = moment().startOf('day')
+let noOfDaysSinceStartDate: number = startDate.diff(currentDate, 'days') + 1
+
+postTweet(noOfDaysSinceStartDate)
