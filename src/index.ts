@@ -12,6 +12,7 @@ const client = new TwitterApi({
 })
 
 const postTweet = async (day: number) => {
+    day++
     const body = {
         text: `${day}`,
         // text: `Day ${day} of tweeting @TESOnline asking them to pls gift me a torchbug pet 🥺 #TorchbugTuesday #ESO #ElderScrollsOnline`,
@@ -24,10 +25,12 @@ const postTweet = async (day: number) => {
     }
 }
 
-const startDate: any = moment('12-01-2022', 'DD-MM-YYYY')
+const startDate: any = moment('13-01-2022', 'DD-MM-YYYY')
 let currentDate: any = moment().startOf('day')
-let noOfDaysSinceStartDate: number = startDate.diff(currentDate, 'days')
+let noOfDaysSinceStartDate: number = currentDate.diff(startDate, 'days')
 
-if (noOfDaysSinceStartDate > 0) {
-    postTweet(noOfDaysSinceStartDate)
-}
+postTweet(noOfDaysSinceStartDate)
+
+// if (noOfDaysSinceStartDate > 0) {
+//     postTweet(noOfDaysSinceStartDate)
+// }
