@@ -25,6 +25,8 @@ const postTweet = async (day: number) => {
 
 const startDate: any = moment('12-01-2022', 'DD-MM-YYYY')
 let currentDate: any = moment().startOf('day')
-let noOfDaysSinceStartDate: number = startDate.diff(currentDate, 'days') + 1
+let noOfDaysSinceStartDate: number = startDate.diff(currentDate, 'days')
 
-postTweet(noOfDaysSinceStartDate)
+if (noOfDaysSinceStartDate > 0) {
+    postTweet(noOfDaysSinceStartDate)
+}
