@@ -13,7 +13,8 @@ const client = new TwitterApi({
 
 const postTweet = async (day: number) => {
     const body = {
-        text: `Day ${day} of tweeting @TESOnline asking them to pls gift me a torchbug pet 🥺 #TorchbugTuesday #ESO #ElderScrollsOnline`,
+        text: `${day}`,
+        // text: `Day ${day} of tweeting @TESOnline asking them to pls gift me a torchbug pet 🥺 #TorchbugTuesday #ESO #ElderScrollsOnline`,
     }
 
     try {
