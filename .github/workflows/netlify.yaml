@@ -1,16 +1,12 @@
-name: 'Netlify'
+name: Trigger Netlify Build
 on:
     schedule:
         # - cron:  '0 14 * * *'
         - cron '* * * * *',
 jobs:
-    deploy:
-        name: 'Deploy'
+    build:
+        name: Request Netlify Webhook
         runs-on: ubuntu-latest
         steps:
-              - uses: actions/checkout@v1
-              - uses: jsmrcaga/action-netlify-deploy@main
-              with:
-                  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_ACCESS_TOKEN }}
-                  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-                  NETLIFY_DEPLOY_TO_PROD: true
+            - name: Curl request
+              run: curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOK }}
