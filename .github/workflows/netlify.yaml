@@ -1,6 +1,6 @@
 name: Trigger Netlify Build
 on:
-    push
+    push:
     schedule:
         - cron: '* * * * *' # Every minute
 jobs:
