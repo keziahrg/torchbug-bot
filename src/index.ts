@@ -12,7 +12,6 @@ const client = new TwitterApi({
 })
 
 const postTweet = async (day: number) => {
-    day++
     const body = {
         text: `Day ${day} of tweeting @TESOnline asking them to pls gift me a torchbug pet 🥺 #TorchbugTuesday #ESO #ElderScrollsOnline`,
     }
