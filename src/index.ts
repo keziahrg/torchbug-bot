@@ -1,32 +1,10 @@
-import dotenv from 'dotenv'
-import moment from 'moment'
-import TwitterApi from 'twitter-api-v2'
+import moment, { Moment } from 'moment'
+import { postTweet } from './postTweet'
 
-dotenv.config()
+const startDate: Moment = moment('14-01-2022', 'DD-MM-YYYY')
+const currentDate: Moment = moment().startOf('day')
+const noOfDaysSinceStartDate: number = currentDate.diff(startDate, 'days')
 
-const client = new TwitterApi({
-    appKey: process.env.CONSUMER_KEY!,
-    appSecret: process.env.CONSUMER_SECRET!,
-    accessToken: process.env.ACCESS_TOKEN!,
-    accessSecret: process.env.ACCESS_TOKEN_SECRET!,
+postTweet({
+    text: `Day ${noOfDaysSinceStartDate} of tweeting @TESOnline asking them to pls gift me a torchbug pet 🥺 #TorchbugTuesday #ESO #ElderScrollsOnline`,
 })
-
-const postTweet = async (day: number) => {
-    const body = {
-        text: `Day ${day} of tweeting @TESOnline asking them to pls gift me a torchbug pet 🥺 #TorchbugTuesday #ESO #ElderScrollsOnline`,
-    }
-
-    try {
-        await client.v2.tweet(body)
-    } catch (err) {
-        console.log('error:', err?.data?.detail)
-    }
-}
-
-const startDate: any = moment('14-01-2022', 'DD-MM-YYYY')
-let currentDate: any = moment().startOf('day')
-let noOfDaysSinceStartDate: number = currentDate.diff(startDate, 'days')
-
-if (noOfDaysSinceStartDate > 0) {
-    postTweet(noOfDaysSinceStartDate)
-}
