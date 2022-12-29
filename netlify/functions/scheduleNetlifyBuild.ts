@@ -1,4 +1,5 @@
 import { Handler, schedule } from '@netlify/functions'
+import fetch from 'node-fetch'
 
 const url = process.env.NETLIFY_BUILD_HOOK ?? ''
 
